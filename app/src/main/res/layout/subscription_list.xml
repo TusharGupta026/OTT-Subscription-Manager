@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#1B1B1B"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="10dp"
+    android:elevation="10dp"
+    android:id="@+id/subscriptionCard"
+    android:layout_height="70dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/subscriptionImage"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/netflix_logo" />
+        <TextView
+            android:id="@+id/subscriptionList"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:text="Netflix"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/rupee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="6dp"
+            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:text="Rs" />
+        <TextView
+            android:id="@+id/amountList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="6dp"
+            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:text="199" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="6dp"
+            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:text="/" />
+        <!--Monthly List-->
+        <TextView
+            android:id="@+id/periodList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:maxLength="1"
+            android:textAllCaps="true"
+            android:layout_marginBottom="12dp"
+            android:textSize="22dp"
+            android:textColor="@color/white"
+            android:text="Monthly" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <!--Description List-->
+        <TextView
+            android:id="@+id/descriptionList"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="85dp"
+            android:layout_marginBottom="4dp"
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            android:text="Premium Plan" />
+
+        <TextView
+            android:id="@+id/emailList"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="257dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/dateList"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="257dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/paymentList"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="257dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
