@@ -73,7 +73,6 @@ public class FirstFragment extends Fragment {
         // creating a variable for gson.
         Gson gson = new Gson();
 
-        // below line is to get to string present from our
         // shared prefs if not present setting it as null.
         String json = sharedPreferences.getString("subscription", null);
         Log.d("subcrip", String.valueOf(json));
