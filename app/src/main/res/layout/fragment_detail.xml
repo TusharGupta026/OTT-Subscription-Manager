@@ -28,6 +28,16 @@
                 app:srcCompat="@drawable/ic_arrow_back"
                 app:tint="@color/black" />
 
+            <ImageView
+                android:id="@+id/addToGoogleCalender"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_notifications"
+                app:tint="@color/black" />
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
@@ -148,7 +158,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Billing Period"
+                android:text="Next Bill Date"
                 android:textSize="18dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -162,16 +172,17 @@
 
                 <TextView
                     android:id="@+id/dateText"
-                    android:layout_width="195dp"
+                    android:layout_width="450dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
+                    android:paddingHorizontal="30dp"
                     android:background="@drawable/round_input"
                     android:ems="1"
                     android:textColor="@color/white"
-                    android:padding="5dp"
+                    android:paddingVertical="5dp"
                     android:textSize="20dp"
-                    android:text="26"/>
+                    android:text="26 March"/>
 
                 <TextView
                     android:id="@+id/periodText"
@@ -199,7 +210,7 @@
                 android:textAllCaps="false"
                 android:background="@drawable/round_button"
                 android:textColor="@color/white"
-                android:text="Remove"/>
+                android:text="Delete Subscription"/>
         </LinearLayout>
 
     </RelativeLayout>

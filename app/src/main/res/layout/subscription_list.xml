@@ -5,7 +5,7 @@
     android:backgroundTint="#1B1B1B"
     android:layout_gravity="center_horizontal"
     android:layout_marginHorizontal="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="13dp"
     app:cardCornerRadius="10dp"
     android:elevation="10dp"
     android:id="@+id/subscriptionCard"
@@ -102,13 +102,14 @@
             android:visibility="gone" />
         <TextView
             android:id="@+id/dateList"
-            android:layout_width="82dp"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="257dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="4dp"
+            android:textSize="13dp"
             android:textColor="@color/white"
-            android:visibility="gone"/>
+            android:text="Next Due: 26 Feb"/>
         <TextView
             android:id="@+id/paymentList"
             android:layout_width="82dp"

@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 
 import android.os.Bundle;
 
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,19 +15,17 @@ import android.widget.Spinner;
 
 import android.widget.Toast;
 
-import com.example.subcrib.model.SubscriptionList;
-import com.example.subcrib.util.RecyclerAdapter;
-import com.google.gson.Gson;
+import com.example.subcrib.util.DbManager;
 
-import java.util.ArrayList;
+
 
 public class SubsciptionAddACtivity extends AppCompatActivity {
     ImageView goBack;
     EditText subscriptionAmount,description,paymentMethod,email,billingDate;
     AppCompatButton saveSubscription;
     Spinner subscriptionSpinner,billingPeriodSpinner;
-    ArrayList<SubscriptionList> subscriptionArrayList=new ArrayList<>();
-    RecyclerAdapter recyclerAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,31 +68,19 @@ public class SubsciptionAddACtivity extends AppCompatActivity {
             }
 
             else {
-                subscriptionArrayList.add(new SubscriptionList(subscriptionAmount.getText().toString(),subscriptionSpinner.getSelectedItem().toString(),description.getText().toString(),paymentMethod.getText().toString(),email.getText().toString(),billingDate.getText().toString(),billingPeriodSpinner.getSelectedItem().toString()));
-                saveData();
+
+                String res=new DbManager(this).addRecord(subscriptionAmount.getText().toString()
+                        ,subscriptionSpinner.getSelectedItem().toString(),
+                        description.getText().toString(),paymentMethod.getText().toString(),
+                        email.getText().toString(),billingDate.getText().toString(),
+                        billingPeriodSpinner.getSelectedItem().toString());
+                Toast.makeText(getApplicationContext(),res,Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(SubsciptionAddACtivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
     }
 
-    private void saveData() {
-        SharedPreferences pref = getSharedPreferences("shared preferences", MODE_PRIVATE); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
-        // creating a new variable for gson.
-        Gson gson = new Gson();
-
-        // getting data from gson and storing it in a string.
-        String json = gson.toJson(subscriptionArrayList);
-
-        // below line is to save data in shared
-        // prefs in the form of string.
-        editor.putString("subscription", json);
-
-        // below line is to apply changes
-        // and save data in shared prefs.
-        editor.apply();
-        Intent intent=new Intent(SubsciptionAddACtivity.this,MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

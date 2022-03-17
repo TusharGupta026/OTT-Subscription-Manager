@@ -1,11 +1,7 @@
 package com.example.subcrib.util;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.subcrib.DetailFragment;
 import com.example.subcrib.R;
 import com.example.subcrib.model.SubscriptionList;
-import java.util.ArrayList;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList<SubscriptionList> subscriptionArrayList;
@@ -70,53 +68,75 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, @SuppressLint("RecyclerView") final int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
 
 
         ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
-        SubscriptionList subscription = subscriptionArrayList.get(i);
+        SubscriptionList subscription = subscriptionArrayList.get(position);
 
         itemViewHolder.subscriptionList.setText(subscription.getSubscription());
         itemViewHolder.descriptionList.setText(subscription.getDescription());
         itemViewHolder.amountList.setText(subscription.getAmount());
         itemViewHolder.periodList.setText(subscription.getBillingPeriod());
         itemViewHolder.emailList.setText(subscription.getEmail());
-        itemViewHolder.dateList.setText(subscription.getBillingDate());
+
+        Calendar currentMonth = Calendar.getInstance();
+        SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+        String billDate;
+
+        if (Integer.parseInt(subscription.getBillingDate()) < Integer.parseInt(dateFormat.format(currentMonth.getTime()))) {
+            // Increment month
+            currentMonth.add(Calendar.MONTH, 1);
+        }
+
+        billDate="Next Due: "+ subscription.getBillingDate()+" "+ dateFormatMonth.format(currentMonth.getTime()).substring(0,3);
+
+
+        itemViewHolder.dateList.setText(billDate);
         itemViewHolder.paymentList.setText(subscription.getPayment());
 
-
-        SharedPreferences pref = context.getSharedPreferences("shared preferences",MODE_PRIVATE); // 0 - for private mode;
         int imageResource;
-        String json = pref.getString("subscription", null);
-        if (json.contains("Netflix")) {
-            imageResource = context.getResources().getIdentifier("@drawable/netflix_logo", null, context.getPackageName());
-            itemViewHolder.subscriptionImage.setImageResource(imageResource);
-        } else if (json.contains("Prime Video")) {
-            imageResource = context.getResources().getIdentifier("@drawable/amazon_prime_video", null, context.getPackageName());
-            itemViewHolder.subscriptionImage.setImageResource(imageResource);
-        } else if (json.contains("Disney+Hotstar")) {
-            imageResource = context.getResources().getIdentifier("@drawable/hotstart_logo", null, context.getPackageName());
-            itemViewHolder.subscriptionImage.setImageResource(imageResource);
-        } else if (json.contains("Youtube Premium")) {
-            imageResource = context.getResources().getIdentifier("@drawable/youtube_logo", null, context.getPackageName());
-            itemViewHolder.subscriptionImage.setImageResource(imageResource);
-        } else if (json.contains("SonyLiv")) {
-            imageResource = context.getResources().getIdentifier("@drawable/sonyliv_logo", null, context.getPackageName());
-            itemViewHolder.subscriptionImage.setImageResource(imageResource);
-        } else if (json.contains("Voot")) {
-            imageResource = context.getResources().getIdentifier("@drawable/voot_logo", null, context.getPackageName());
-            itemViewHolder.subscriptionImage.setImageResource(imageResource);
-        } else if (json.contains("MxPlayer")) {
-            imageResource = context.getResources().getIdentifier("@drawable/mxplayer_logo", null, context.getPackageName());
-            itemViewHolder.subscriptionImage.setImageResource(imageResource);
-        } else if (json.contains("Zee5")) {
-            imageResource = context.getResources().getIdentifier("@drawable/zee5_logo", null, context.getPackageName());
-            itemViewHolder.subscriptionImage.setImageResource(imageResource);
+
+        switch (subscription.getSubscription()) {
+            case "Netflix":
+                imageResource = context.getResources().getIdentifier("@drawable/netflix_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Prime Video":
+                imageResource = context.getResources().getIdentifier("@drawable/amazon_prime_video", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Disney+Hotstar":
+                imageResource = context.getResources().getIdentifier("@drawable/hotstart_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Youtube Premium":
+                imageResource = context.getResources().getIdentifier("@drawable/youtube_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "SonyLiv":
+                imageResource = context.getResources().getIdentifier("@drawable/sonyliv_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Voot":
+                imageResource = context.getResources().getIdentifier("@drawable/voot_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "MxPlayer":
+                imageResource = context.getResources().getIdentifier("@drawable/mxplayer_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Zee5":
+                imageResource = context.getResources().getIdentifier("@drawable/zee5_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
         }
 
         itemViewHolder.subscriptionCard.setOnClickListener(view -> {
             AppCompatActivity activity=(AppCompatActivity) view.getContext();
-            DetailFragment detailFragment=new DetailFragment(subscription.getAmount(),subscription.getSubscription(),subscription.getDescription(),subscription.getPayment(),subscription.getEmail(),subscription.getBillingDate(),subscription.getBillingPeriod());
+            String nextBill=subscription.getBillingDate() + " " + dateFormatMonth.format(currentMonth.getTime());
+            DetailFragment detailFragment=new DetailFragment(subscription.getId(), subscription.getAmount(),subscription.getSubscription(),subscription.getDescription(),subscription.getPayment(),subscription.getEmail(),nextBill,subscription.getBillingPeriod());
             activity.findViewById(R.id.fab).setVisibility(View.GONE);
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_main,detailFragment).addToBackStack(null).commit();
 

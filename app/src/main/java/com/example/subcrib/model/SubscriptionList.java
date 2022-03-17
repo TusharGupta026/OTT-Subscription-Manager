@@ -9,7 +9,18 @@ public class SubscriptionList {
     private String billingDate;
     private String billingPeriod;
 
-    public SubscriptionList(String amount, String subscription, String description, String payment, String email, String billingDate, String billingPeriod) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
+
+    public SubscriptionList(int id, String amount, String subscription, String description, String payment, String email, String billingDate, String billingPeriod) {
+        this.id=id;
         this.amount = amount;
         this.subscription = subscription;
         this.description = description;
