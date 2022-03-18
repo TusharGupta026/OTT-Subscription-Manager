@@ -45,25 +45,18 @@ public class NotificationManager extends SQLiteOpenHelper {
         }
     }
 
-    public String updateNotification(String originalNotification,int notificationId, String notification){
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues cv=new ContentValues();
-        cv.put("notificationId",notificationId);
-        cv.put("notification",notification);
-
-
-        float res=db.update("notifications",cv,"notificationId=?",new String[] {originalNotification});
-        if(res==-1){
-            return "Failed to delete Reminder";
-        }else{
-            return "Reminder delete from your calendar";
-        }
+    public String deleteNotification(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE  FROM " + "notifications" + " WHERE " +
+                "notificationId" + " = " + id + ";");
+        db.close();
+        return "Reminder delete from your calendar";
     }
 
 
-    public Cursor readNotificationData(){
+    public Cursor readNotificationData(int notificationId){
         SQLiteDatabase db=this.getWritableDatabase();
-        String query="select * from notifications";
+        String query="select * from notifications WHERE notificationId="+notificationId+";";
         Cursor cursor=db.rawQuery(query,null);
         return cursor;
     }

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.subcrib.databinding.FragmentFirstBinding;
 import com.example.subcrib.model.SubscriptionList;
 import com.example.subcrib.util.DbManager;
-import com.example.subcrib.util.NotificationManager;
 import com.example.subcrib.util.RecyclerAdapter;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FirstFragment extends Fragment {
 

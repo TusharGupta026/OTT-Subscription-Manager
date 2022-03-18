@@ -2,8 +2,6 @@ package com.example.subcrib;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,25 +14,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.subcrib.databinding.FragmentDetailBinding;
-
-import com.example.subcrib.model.NotificationList;
-import com.example.subcrib.model.SubscriptionList;
 import com.example.subcrib.util.DbManager;
 import com.example.subcrib.util.NotificationManager;
-import com.google.gson.Gson;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
@@ -59,9 +47,6 @@ public class DetailFragment extends Fragment {
     private int id;
     int icon;
     private boolean paused = true;
-    private ArrayList<NotificationList> notificationArrayList = new ArrayList<>();
-    final private LiveData<NotificationList> user = new MutableLiveData<>();
-
 
     public DetailFragment() {
         // Required empty public constructor
@@ -92,7 +77,6 @@ public class DetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -140,32 +124,19 @@ public class DetailFragment extends Fragment {
 
         });
 
-//        Cursor cursor=new NotificationManager(this.getContext()).readNotificationData();
-//
-//        while(cursor.moveToNext()){
-//            NotificationList obj=new NotificationList(cursor.getInt(0), cursor.getString(1));
-//            notificationArrayList.add(obj);
-//
-//        }
-//
-//        NotificationList note=notificationArrayList.get(0);
-//        for(int i=0;i<notificationArrayList.size();i++){
-//            Log.d("paused", String.valueOf(note.getNotificationId()));
-//        }
+        Cursor cursor=new NotificationManager(this.getContext()).readNotificationData(id);
 
-//        if( (notificationId == id) && (notification.contains("true"))){
-//
-//            icon = R.drawable.ic_notifications_active;
-//                   // Log.d("paused", String.valueOf(notificationArrayList.));
-////                Log.d("paused", String.valueOf(cursor.getInt(0)));
-////                Log.d("paused", String.valueOf(cursor.getString(1)));
-//
-//        }else{
-//            icon=R.drawable.ic_notifications;
-//        }
-
-//        addToGoogleCalender.setImageDrawable(
-//                ContextCompat.getDrawable(getContext(), icon));
+        while(cursor.moveToNext()){
+            if((cursor.getInt(0) == id) && (cursor.getString(1).contains("true"))){
+                paused=false;
+                icon = R.drawable.ic_notifications_active;
+            }else{
+                paused=true;
+                icon=R.drawable.ic_notifications;
+            }
+            addToGoogleCalender.setImageDrawable(
+                    ContextCompat.getDrawable(getContext(), icon));
+        }
 
         addToGoogleCalender.setOnClickListener(view -> {
 
@@ -210,7 +181,7 @@ public class DetailFragment extends Fragment {
                 Log.d("debug", String.valueOf(id));
                 int rows = requireContext().getContentResolver().delete(deleteUri, null, null);
                 Log.d("debug", String.valueOf(deleteUri));
-                String res=new NotificationManager(this.getContext()).updateNotification("true",id,"false");
+                String res=new NotificationManager(this.getContext()).deleteNotification(id);
                 Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
 
             }
