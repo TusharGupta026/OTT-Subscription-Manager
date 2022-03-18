@@ -2,13 +2,14 @@ package com.example.subcrib.model;
 
 public class NotificationList {
     private int notificationId;
+    private String notification;
+
 
     public NotificationList(int notificationId, String notification) {
         this.notificationId = notificationId;
         this.notification = notification;
     }
 
-    private String notification;
 
     public int getNotificationId() {
         return notificationId;

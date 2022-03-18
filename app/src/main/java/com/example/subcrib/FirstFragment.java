@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.subcrib.databinding.FragmentFirstBinding;
 import com.example.subcrib.model.SubscriptionList;
 import com.example.subcrib.util.DbManager;
+import com.example.subcrib.util.NotificationManager;
 import com.example.subcrib.util.RecyclerAdapter;
 
 import java.util.ArrayList;
@@ -66,8 +67,6 @@ public class FirstFragment extends Fragment {
 
         Cursor cursor=new DbManager(this.getContext()).readalldata();
 
-
-
         while(cursor.moveToNext()){
             SubscriptionList obj=new SubscriptionList(cursor.getInt(0), cursor.getString(1),cursor.getString(2),
                     cursor.getString(3),cursor.getString(4),cursor.getString(5),
@@ -75,6 +74,7 @@ public class FirstFragment extends Fragment {
 
             subscriptionArrayList.add(obj);
         }
+
         recyclerAdapter = new RecyclerAdapter(subscriptionArrayList,getContext());
 
         subscriptionRecyclerView.setAdapter(recyclerAdapter);

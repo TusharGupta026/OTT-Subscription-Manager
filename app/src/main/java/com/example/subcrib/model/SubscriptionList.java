@@ -9,6 +9,8 @@ public class SubscriptionList {
     private String billingDate;
     private String billingPeriod;
 
+
+
     public int getId() {
         return id;
     }
@@ -28,8 +30,9 @@ public class SubscriptionList {
         this.email = email;
         this.billingDate = billingDate;
         this.billingPeriod = billingPeriod;
-    }
 
+    }
+    
 
     public String getAmount() {
         return amount;
@@ -86,6 +89,5 @@ public class SubscriptionList {
     public void setBillingPeriod(String billingPeriod) {
         this.billingPeriod = billingPeriod;
     }
-
-
+    
 }

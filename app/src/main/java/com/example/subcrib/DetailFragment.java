@@ -22,14 +22,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.subcrib.databinding.FragmentDetailBinding;
 
+import com.example.subcrib.model.NotificationList;
 import com.example.subcrib.model.SubscriptionList;
 import com.example.subcrib.util.DbManager;
 import com.example.subcrib.util.NotificationManager;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
@@ -54,6 +59,8 @@ public class DetailFragment extends Fragment {
     private int id;
     int icon;
     private boolean paused = true;
+    private ArrayList<NotificationList> notificationArrayList = new ArrayList<>();
+    final private LiveData<NotificationList> user = new MutableLiveData<>();
 
 
     public DetailFragment() {
@@ -133,28 +140,32 @@ public class DetailFragment extends Fragment {
 
         });
 
-        Cursor cursor=new NotificationManager(this.getContext()).readNotificationData();
+//        Cursor cursor=new NotificationManager(this.getContext()).readNotificationData();
+//
+//        while(cursor.moveToNext()){
+//            NotificationList obj=new NotificationList(cursor.getInt(0), cursor.getString(1));
+//            notificationArrayList.add(obj);
+//
+//        }
+//
+//        NotificationList note=notificationArrayList.get(0);
+//        for(int i=0;i<notificationArrayList.size();i++){
+//            Log.d("paused", String.valueOf(note.getNotificationId()));
+//        }
 
-        while(cursor.moveToNext()){
+//        if( (notificationId == id) && (notification.contains("true"))){
+//
+//            icon = R.drawable.ic_notifications_active;
+//                   // Log.d("paused", String.valueOf(notificationArrayList.));
+////                Log.d("paused", String.valueOf(cursor.getInt(0)));
+////                Log.d("paused", String.valueOf(cursor.getString(1)));
+//
+//        }else{
+//            icon=R.drawable.ic_notifications;
+//        }
 
-            if( (cursor.moveToNext()) && (cursor.getInt(0)==id) && (cursor.getString(1).equals("true"))){
-                paused = false;
-                icon = R.drawable.ic_notifications_active;
-
-//                Log.d("paused", String.valueOf(cursor.moveToNext()));
-//                Log.d("paused", String.valueOf(cursor.getInt(0)));
-//                Log.d("paused", String.valueOf(cursor.getString(1)));
-//                Log.d("paused", String.valueOf(id));
-            }else{
-                paused =true;
-                icon=R.drawable.ic_notifications;
-            }
-
-            addToGoogleCalender.setImageDrawable(
-                    ContextCompat.getDrawable(getContext(), icon));
-        }
-
-
+//        addToGoogleCalender.setImageDrawable(
+//                ContextCompat.getDrawable(getContext(), icon));
 
         addToGoogleCalender.setOnClickListener(view -> {
 
@@ -199,7 +210,7 @@ public class DetailFragment extends Fragment {
                 Log.d("debug", String.valueOf(id));
                 int rows = requireContext().getContentResolver().delete(deleteUri, null, null);
                 Log.d("debug", String.valueOf(deleteUri));
-                String res=new NotificationManager(this.getContext()).deleteNotification(id);
+                String res=new NotificationManager(this.getContext()).updateNotification("true",id,"false");
                 Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
 
             }
@@ -207,6 +218,7 @@ public class DetailFragment extends Fragment {
 
             addToGoogleCalender.setImageDrawable(
                     ContextCompat.getDrawable(getContext(), icon));
+
         });
 
 
