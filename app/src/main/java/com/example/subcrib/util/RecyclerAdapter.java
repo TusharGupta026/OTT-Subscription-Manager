@@ -23,6 +23,7 @@ import java.util.Calendar;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList<SubscriptionList> subscriptionArrayList;
     private final Context context;
+    private int imageResource;
 
 
     public RecyclerAdapter(ArrayList<SubscriptionList> subscriptionArrayList,Context context) {
@@ -96,67 +97,82 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         itemViewHolder.dateList.setText(billDate);
         itemViewHolder.paymentList.setText(subscription.getPayment());
 
-        int imageResource;
+
 
         switch (subscription.getSubscription()) {
             case "Netflix":
                 imageResource = context.getResources().getIdentifier("@drawable/netflix_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Prime Video":
                 imageResource = context.getResources().getIdentifier("@drawable/amazon_prime_video", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Disney+Hotstar":
                 imageResource = context.getResources().getIdentifier("@drawable/hotstart_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Youtube Premium":
                 imageResource = context.getResources().getIdentifier("@drawable/youtube_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "SonyLiv":
                 imageResource = context.getResources().getIdentifier("@drawable/sonyliv_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Voot":
                 imageResource = context.getResources().getIdentifier("@drawable/voot_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "MxPlayer":
                 imageResource = context.getResources().getIdentifier("@drawable/mxplayer_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Zee5":
                 imageResource = context.getResources().getIdentifier("@drawable/zee5_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "ALTBalaji":
                 imageResource = context.getResources().getIdentifier("@drawable/altbalaji_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Viu":
                 imageResource = context.getResources().getIdentifier("@drawable/viu_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Hoichoi":
                 imageResource = context.getResources().getIdentifier("@drawable/hoichoi_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Spotify":
                 imageResource = context.getResources().getIdentifier("@drawable/spotify_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Gaana":
                 imageResource = context.getResources().getIdentifier("@drawable/gaana_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "Youtube Music":
                 imageResource = context.getResources().getIdentifier("@drawable/youtube_music_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
             case "JioSaavn":
                 imageResource = context.getResources().getIdentifier("@drawable/jio_saavn_logo", null, context.getPackageName());
+                subscription.setImageResource(imageResource);
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
         }
@@ -164,7 +180,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         itemViewHolder.subscriptionCard.setOnClickListener(view -> {
             AppCompatActivity activity=(AppCompatActivity) view.getContext();
             String nextBill=subscription.getBillingDate() + " " + dateFormatMonth.format(currentMonth.getTime());
-            DetailFragment detailFragment=new DetailFragment(subscription.getId(), subscription.getAmount(),subscription.getSubscription(),subscription.getDescription(),subscription.getPayment(),subscription.getEmail(),nextBill,subscription.getBillingPeriod());
+            DetailFragment detailFragment=new DetailFragment(subscription.getId(), subscription.getAmount(),subscription.getSubscription(),subscription.getDescription(),subscription.getPayment(),subscription.getEmail(),nextBill,subscription.getBillingPeriod(), subscription.getImageResource());
             activity.findViewById(R.id.fab).setVisibility(View.GONE);
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_main,detailFragment).addToBackStack(null).commit();
 

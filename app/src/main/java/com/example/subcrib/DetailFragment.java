@@ -37,7 +37,7 @@ public class DetailFragment extends Fragment {
     private FragmentDetailBinding binding;
 
     TextView amountText,subscriptionText,descriptionText,paymentText,emailText,dateText,periodText;
-    ImageView goBackToHome, addToGoogleCalender;
+    ImageView goBackToHome, addToGoogleCalender,imageLogo;
 
     AppCompatButton removeSubscription;
     private String amount;
@@ -48,6 +48,7 @@ public class DetailFragment extends Fragment {
     private String billingDate;
     private String billingPeriod;
     private int id;
+    private int imageResource;
     int icon;
     int beginTime;
     private boolean paused = true;
@@ -55,7 +56,7 @@ public class DetailFragment extends Fragment {
     public DetailFragment() {
         // Required empty public constructor
     }
-    public DetailFragment(int id,String amount, String subscription, String description, String payment, String email, String billingDate, String billingPeriod){
+    public DetailFragment(int id,String amount, String subscription, String description, String payment, String email, String billingDate, String billingPeriod,int imageResource){
         this.amount = amount;
         this.subscription = subscription;
         this.description = description;
@@ -64,6 +65,7 @@ public class DetailFragment extends Fragment {
         this.billingDate = billingDate;
         this.billingPeriod = billingPeriod;
         this.id=id;
+        this.imageResource=imageResource;
     }
 
 
@@ -99,15 +101,17 @@ public class DetailFragment extends Fragment {
         goBackToHome=(ImageView) binding.getRoot().findViewById(R.id.goBackToHome);
         removeSubscription=(AppCompatButton) binding.getRoot().findViewById(R.id.removeSubscription);
         addToGoogleCalender=(ImageView) binding.getRoot().findViewById(R.id.addToGoogleCalender);
+        imageLogo=(ImageView) binding.getRoot().findViewById(R.id.imageLogo);
 
 
-        amountText.setText(amount);
+        amountText.setText("Rs "+amount);
         subscriptionText.setText(subscription);
         descriptionText.setText(description);
         paymentText.setText(payment);
         emailText.setText(email);
         dateText.setText(billingDate);
         periodText.setText("/ "+billingPeriod);
+        imageLogo.setImageResource(imageResource);
 
         goBackToHome.setOnClickListener(view -> {
             AppCompatActivity activity=(AppCompatActivity) view.getContext();

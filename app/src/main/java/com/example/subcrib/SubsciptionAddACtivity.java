@@ -48,7 +48,7 @@ public class SubsciptionAddACtivity extends AppCompatActivity {
         email=(EditText) findViewById(R.id.email);
 
         billingDate=(EditText) findViewById(R.id.billingDate);
-        billingDate.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "31")});
+        billingDate.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "30")});
         saveSubscription=(AppCompatButton) findViewById(R.id.saveSubscription);
 
         String[] items = new String[]{"Netflix","Prime Video","Disney+Hotstar","Youtube Premium","SonyLiv",

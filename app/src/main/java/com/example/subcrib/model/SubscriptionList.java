@@ -9,6 +9,16 @@ public class SubscriptionList {
     private String billingDate;
     private String billingPeriod;
 
+    public int getImageResource() {
+        return imageResource;
+    }
+
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
+    }
+
+    private int imageResource;
+
 
 
     public int getId() {
