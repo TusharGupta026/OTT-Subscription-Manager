@@ -1,7 +1,9 @@
 package com.example.subcrib;
 
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import com.example.subcrib.util.DbManager;
 import com.example.subcrib.util.NotificationManager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -46,6 +49,7 @@ public class DetailFragment extends Fragment {
     private String billingPeriod;
     private int id;
     int icon;
+    int beginTime;
     private boolean paused = true;
 
     public DetailFragment() {
@@ -148,32 +152,51 @@ public class DetailFragment extends Fragment {
 
                 paused =false;
                 icon = R.drawable.ic_notifications_active;
-
                 event.put(CalendarContract.Events.CALENDAR_ID, 1);
-
                 event.put(CalendarContract.Events.TITLE, subscription + " Payment Due");
                 event.put(CalendarContract.Events.DESCRIPTION, description);
 
-                Log.d("debug",CalendarContract.Events.CALENDAR_ID);
-                Log.d("debug", String.valueOf(id));
-                event.put(CalendarContract.Events.DTSTART,billingDate.substring(0,2));
-                event.put(CalendarContract.Events.DTEND, cal.getTimeInMillis()+ 60*60*1000);
+                if(Integer.parseInt(billingDate.substring(0,2)) >= Integer.parseInt(dateFormat.format(cal.getTime()))){
+
+                    beginTime= Integer.parseInt(billingDate.substring(0,2)) - Integer.parseInt(dateFormat.format(cal.getTime()));
+                    cal.add(Calendar.DAY_OF_YEAR,30+beginTime);
+                }else{
+
+                    beginTime= Integer.parseInt(dateFormat.format(cal.getTime()))- Integer.parseInt(billingDate.substring(0,2));
+                    // now add 30 day in Calendar instance
+                    cal.add(Calendar.DAY_OF_YEAR, 30-beginTime);
+                }
+
+                event.put(CalendarContract.Events.DTSTART,cal.getTimeInMillis()+24*60*60*1000);
+                event.put(CalendarContract.Events.DTEND, cal.getTimeInMillis());
                 event.put(CalendarContract.Events.ALL_DAY, 1);   // 0 for false, 1 for true
                 event.put(CalendarContract.Events.HAS_ALARM, 1); // 0 for false, 1 for true
-                event.put(CalendarContract.Events._ID,id);
+                event.put(CalendarContract.Events.RRULE,"FREQ=MONTHLY;");
+
+                event.put(CalendarContract.Events.ORIGINAL_ID, id);
 
                 String timeZone = TimeZone.getDefault().getID();
                 event.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone);
 
                 Uri baseUri;
+                ContentResolver cr = getContext().getContentResolver();
                 baseUri = Uri.parse("content://com.android.calendar/events");
-                requireContext().getContentResolver().insert(baseUri, event);
+                Uri uri= cr.insert(baseUri, event);
+
+                long eventID = Long.parseLong(uri.getLastPathSegment());
+
+                    ContentValues reminders = new ContentValues();
+                    reminders.put(CalendarContract.Reminders.EVENT_ID, eventID);
+                    reminders.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+                    reminders.put(CalendarContract.Reminders.MINUTES, 240);
+                    cr.insert(CalendarContract.Reminders.CONTENT_URI, reminders);
+
 
                 String res=new NotificationManager(this.getContext()).addNotification(id,"true");
-
                 Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
 
             }else {
+
                 paused=true;
                 icon = R.drawable.ic_notifications;
                 Uri deleteUri = null;
@@ -191,8 +214,6 @@ public class DetailFragment extends Fragment {
                     ContextCompat.getDrawable(getContext(), icon));
 
         });
-
-
 
         container.setFocusableInTouchMode(true);
         container.requestFocus();
