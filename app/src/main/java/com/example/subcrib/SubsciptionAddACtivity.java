@@ -1,6 +1,7 @@
 package com.example.subcrib;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
+import android.text.InputFilter;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.Spinner;
 
 import android.widget.Toast;
 
+import com.example.subcrib.model.InputFilterMinMax;
 import com.example.subcrib.util.DbManager;
 
 
@@ -31,6 +34,7 @@ public class SubsciptionAddACtivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subsciption_add);
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         getSupportActionBar().hide();
 
         goBack=(ImageView) findViewById(R.id.goBack);
@@ -44,10 +48,13 @@ public class SubsciptionAddACtivity extends AppCompatActivity {
         email=(EditText) findViewById(R.id.email);
 
         billingDate=(EditText) findViewById(R.id.billingDate);
+        billingDate.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "31")});
         saveSubscription=(AppCompatButton) findViewById(R.id.saveSubscription);
 
-        String[] items = new String[]{"Netflix", "Prime Video", "Disney+Hotstar","Youtube Premium","SonyLiv","Voot","MxPlayer","Zee5"};
-        String[] items1 = new String[]{"Monthly","Yearly"};
+        String[] items = new String[]{"Netflix","Prime Video","Disney+Hotstar","Youtube Premium","SonyLiv",
+                "Voot","MxPlayer","Zee5","ALTBalaji","Viu","Hoichoi","Spotify","Gaana","Youtube Music",
+        "JioSaavn"};
+        String[] items1 = new String[]{"Monthly"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);

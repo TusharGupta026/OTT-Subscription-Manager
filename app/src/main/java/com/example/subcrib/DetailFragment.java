@@ -233,6 +233,4 @@ public class DetailFragment extends Fragment {
         return binding.getRoot();
     }
 
-
-
 }

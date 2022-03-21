@@ -131,6 +131,34 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 imageResource = context.getResources().getIdentifier("@drawable/zee5_logo", null, context.getPackageName());
                 itemViewHolder.subscriptionImage.setImageResource(imageResource);
                 break;
+            case "ALTBalaji":
+                imageResource = context.getResources().getIdentifier("@drawable/altbalaji_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Viu":
+                imageResource = context.getResources().getIdentifier("@drawable/viu_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Hoichoi":
+                imageResource = context.getResources().getIdentifier("@drawable/hoichoi_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Spotify":
+                imageResource = context.getResources().getIdentifier("@drawable/spotify_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Gaana":
+                imageResource = context.getResources().getIdentifier("@drawable/gaana_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "Youtube Music":
+                imageResource = context.getResources().getIdentifier("@drawable/youtube_music_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
+            case "JioSaavn":
+                imageResource = context.getResources().getIdentifier("@drawable/jio_saavn_logo", null, context.getPackageName());
+                itemViewHolder.subscriptionImage.setImageResource(imageResource);
+                break;
         }
 
         itemViewHolder.subscriptionCard.setOnClickListener(view -> {

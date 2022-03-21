@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="#1B1B1B"
     android:layout_gravity="center_horizontal"
-    android:layout_marginHorizontal="10dp"
+    android:layout_marginHorizontal="11dp"
     android:layout_marginTop="13dp"
     app:cardCornerRadius="10dp"
     android:elevation="10dp"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/subscriptionImage"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/netflix_logo" />
         <TextView
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="8dp"
             android:layout_gravity="end"
             android:layout_marginBottom="6dp"
             android:textSize="25dp"
@@ -66,11 +66,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:maxLength="1"
             android:textAllCaps="true"
             android:layout_marginBottom="12dp"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:textColor="@color/white"
             android:text="Monthly" />
     </LinearLayout>
@@ -85,7 +85,7 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="85dp"
+            android:layout_marginStart="75dp"
             android:layout_marginBottom="4dp"
             android:textSize="14dp"
             android:textColor="@color/white"
@@ -105,7 +105,7 @@
             android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="20dp"
             android:layout_marginBottom="4dp"
             android:textSize="13dp"
             android:textColor="@color/white"
