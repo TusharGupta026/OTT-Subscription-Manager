@@ -91,7 +91,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             currentMonth.add(Calendar.MONTH, 1);
         }
 
-        billDate="Next Due: "+ subscription.getBillingDate()+" "+ dateFormatMonth.format(currentMonth.getTime()).substring(0,3);
+        billDate="Due: "+ subscription.getBillingDate()+" "+ dateFormatMonth.format(currentMonth.getTime()).substring(0,3);
 
 
         itemViewHolder.dateList.setText(billDate);

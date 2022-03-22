@@ -60,10 +60,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subscription"
-                android:textSize="18dp"
                 android:layout_marginBottom="10dp"
+                android:fontFamily="@font/epilogue_bold"
+                android:text="Subscription"
                 android:textColor="@color/grey"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -72,10 +73,11 @@
                 android:layout_height="40dp"
                 android:background="@drawable/round_input"
                 android:dropDownWidth="match_parent"
-                android:textColor="@color/white"
+                android:fontFamily="@font/encode_sans_medium"
                 android:padding="5dp"
-                android:textSize="20dp"
-                android:text="Netflix" />
+                android:text="Netflix"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,6 +85,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Amount"
                 android:textSize="18dp"
+                android:fontFamily="@font/epilogue_bold"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/grey"
                 android:textStyle="bold" />
@@ -94,6 +97,7 @@
                 android:background="@drawable/round_input"
                 android:dropDownWidth="match_parent"
                 android:textColor="@color/white"
+                android:fontFamily="@font/encode_sans_medium"
                 android:padding="5dp"
                 android:textSize="20dp"
                 android:text="Rs 199" />
@@ -104,6 +108,7 @@
                 android:text="Description"
                 android:textSize="18dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/epilogue_bold"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/grey"
                 android:textStyle="bold" />
@@ -115,6 +120,7 @@
                 android:background="@drawable/round_input"
                 android:dropDownWidth="match_parent"
                 android:textColor="@color/white"
+                android:fontFamily="@font/encode_sans_medium"
                 android:padding="5dp"
                 android:textSize="20dp"
                 android:text="Premium Plan" />
@@ -124,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:text="Payment Method"
                 android:textSize="18dp"
+                android:fontFamily="@font/epilogue_bold"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/grey"
@@ -138,6 +145,7 @@
                 android:textColor="@color/white"
                 android:padding="5dp"
                 android:textSize="20dp"
+                android:fontFamily="@font/encode_sans_medium"
                 android:text="Credit Card" />
 
             <TextView
@@ -145,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:text="Email"
                 android:textSize="18dp"
+                android:fontFamily="@font/epilogue_bold"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/grey"
@@ -158,6 +167,7 @@
                 android:textColor="@color/white"
                 android:padding="5dp"
                 android:textSize="20dp"
+                android:fontFamily="@font/encode_sans_medium"
                 android:text="guptatushar802@gmail.com" />
 
             <TextView
@@ -165,6 +175,7 @@
                 android:layout_height="wrap_content"
                 android:text="Next Bill Date"
                 android:textSize="18dp"
+                android:fontFamily="@font/epilogue_bold"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/grey"
@@ -181,9 +192,9 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:paddingHorizontal="30dp"
                     android:background="@drawable/round_input"
                     android:ems="1"
+                    android:fontFamily="@font/encode_sans_medium"
                     android:textColor="@color/white"
                     android:paddingVertical="5dp"
                     android:textSize="20dp"
@@ -194,10 +205,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="15dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.05"
                     android:background="@drawable/round_input"
                     android:textColor="@color/white"
                     android:padding="5dp"
+                    android:fontFamily="@font/encode_sans_medium"
                     android:gravity="center"
                     android:textSize="20dp"
                     android:text="Monthly"/>
@@ -209,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:paddingHorizontal="40dp"
-                android:paddingVertical="17dp"
+                android:paddingVertical="12dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="30dp"
                 android:textAllCaps="false"
