@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DbManager extends SQLiteOpenHelper {
 
-    private static final String dbname="dbsubscription";
+    private static final String dbname="dbsubscriptions";
 
 
     public DbManager(@Nullable Context context) {

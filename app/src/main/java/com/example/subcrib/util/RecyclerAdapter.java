@@ -180,7 +180,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         itemViewHolder.subscriptionCard.setOnClickListener(view -> {
             AppCompatActivity activity=(AppCompatActivity) view.getContext();
             String nextBill=subscription.getBillingDate() + " " + dateFormatMonth.format(currentMonth.getTime());
-            DetailFragment detailFragment=new DetailFragment(subscription.getId(), subscription.getAmount(),subscription.getSubscription(),subscription.getDescription(),subscription.getPayment(),subscription.getEmail(),nextBill,subscription.getBillingPeriod(), subscription.getImageResource());
+            DetailFragment detailFragment=new DetailFragment(subscription.getId(), subscription.getAmount(),subscription.getSubscription(),subscription.getDescription(),subscription.getPayment(),subscription.getEmail(),nextBill,subscription.getBillingPeriod(), subscription.getImageResource(),subscription.getBillingDate());
             activity.findViewById(R.id.fab).setVisibility(View.GONE);
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_main,detailFragment).addToBackStack(null).commit();
 

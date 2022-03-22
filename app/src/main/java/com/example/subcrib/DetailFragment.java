@@ -1,9 +1,9 @@
 package com.example.subcrib;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.subcrib.databinding.FragmentDetailBinding;
@@ -26,11 +27,14 @@ import com.example.subcrib.util.DbManager;
 import com.example.subcrib.util.NotificationManager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 
-public class DetailFragment extends Fragment {
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
+
+public class DetailFragment extends Fragment implements EasyPermissions.PermissionCallbacks{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -51,12 +55,13 @@ public class DetailFragment extends Fragment {
     private int imageResource;
     int icon;
     int beginTime;
+    private String bill;
     private boolean paused = true;
 
     public DetailFragment() {
         // Required empty public constructor
     }
-    public DetailFragment(int id,String amount, String subscription, String description, String payment, String email, String billingDate, String billingPeriod,int imageResource){
+    public DetailFragment(int id,String amount, String subscription, String description, String payment, String email, String billingDate, String billingPeriod,int imageResource,String bill){
         this.amount = amount;
         this.subscription = subscription;
         this.description = description;
@@ -66,6 +71,7 @@ public class DetailFragment extends Fragment {
         this.billingPeriod = billingPeriod;
         this.id=id;
         this.imageResource=imageResource;
+        this.bill=bill;
     }
 
 
@@ -145,77 +151,15 @@ public class DetailFragment extends Fragment {
             addToGoogleCalender.setImageDrawable(
                     ContextCompat.getDrawable(getContext(), icon));
         }
+        Log.d("date",billingDate);
 
         addToGoogleCalender.setOnClickListener(view -> {
 
-            Calendar cal = Calendar.getInstance();
-            final ContentValues event = new ContentValues();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+         ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_CALENDAR,Manifest.permission.WRITE_CALENDAR},1);
 
-            if (paused) {
-
-                paused =false;
-                icon = R.drawable.ic_notifications_active;
-                event.put(CalendarContract.Events.CALENDAR_ID, 1);
-                event.put(CalendarContract.Events.TITLE, subscription + " Payment Due");
-                event.put(CalendarContract.Events.DESCRIPTION, description);
-
-                if(Integer.parseInt(billingDate.substring(0,2)) >= Integer.parseInt(dateFormat.format(cal.getTime()))){
-
-                    beginTime= Integer.parseInt(billingDate.substring(0,2)) - Integer.parseInt(dateFormat.format(cal.getTime()));
-                    cal.add(Calendar.DAY_OF_YEAR,30+beginTime);
-                }else{
-
-                    beginTime= Integer.parseInt(dateFormat.format(cal.getTime()))- Integer.parseInt(billingDate.substring(0,2));
-                    // now add 30 day in Calendar instance
-                    cal.add(Calendar.DAY_OF_YEAR, 30-beginTime);
-                }
-
-                event.put(CalendarContract.Events.DTSTART,cal.getTimeInMillis()+24*60*60*1000);
-                event.put(CalendarContract.Events.DTEND, cal.getTimeInMillis());
-                event.put(CalendarContract.Events.ALL_DAY, 1);   // 0 for false, 1 for true
-                event.put(CalendarContract.Events.HAS_ALARM, 1); // 0 for false, 1 for true
-                event.put(CalendarContract.Events.RRULE,"FREQ=MONTHLY;");
-
-                event.put(CalendarContract.Events.ORIGINAL_ID, id);
-
-                String timeZone = TimeZone.getDefault().getID();
-                event.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone);
-
-                Uri baseUri;
-                ContentResolver cr = getContext().getContentResolver();
-                baseUri = Uri.parse("content://com.android.calendar/events");
-                Uri uri= cr.insert(baseUri, event);
-
-                long eventID = Long.parseLong(uri.getLastPathSegment());
-
-                    ContentValues reminders = new ContentValues();
-                    reminders.put(CalendarContract.Reminders.EVENT_ID, eventID);
-                    reminders.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
-                    reminders.put(CalendarContract.Reminders.MINUTES, 240);
-                    cr.insert(CalendarContract.Reminders.CONTENT_URI, reminders);
-
-
-                String res=new NotificationManager(this.getContext()).addNotification(id,"true");
-                Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
-
-            }else {
-
-                paused=true;
-                icon = R.drawable.ic_notifications;
-                Uri deleteUri = null;
-                deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id);
-                Log.d("debug", String.valueOf(id));
-                int rows = requireContext().getContentResolver().delete(deleteUri, null, null);
-                Log.d("debug", String.valueOf(deleteUri));
-                String res=new NotificationManager(this.getContext()).deleteNotification(id);
-                Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
-
-            }
-
-
-            addToGoogleCalender.setImageDrawable(
-                    ContextCompat.getDrawable(getContext(), icon));
+        if(EasyPermissions.hasPermissions(getActivity(), Manifest.permission.READ_CALENDAR,Manifest.permission.WRITE_CALENDAR)){
+            addCalendar();
+        }
 
         });
 
@@ -237,4 +181,89 @@ public class DetailFragment extends Fragment {
         return binding.getRoot();
     }
 
+
+
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
+    }
+
+    private void addCalendar() {
+
+        Calendar cal = Calendar.getInstance();
+        final ContentValues event = new ContentValues();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+
+        if (paused) {
+
+            paused =false;
+            icon = R.drawable.ic_notifications_active;
+            event.put(CalendarContract.Events.CALENDAR_ID, 1);
+            event.put(CalendarContract.Events.TITLE, subscription + " Payment Due");
+            event.put(CalendarContract.Events.DESCRIPTION, description);
+
+            if(Integer.parseInt(bill) >= Integer.parseInt(dateFormat.format(cal.getTime()))){
+
+                beginTime= Integer.parseInt(bill) - Integer.parseInt(dateFormat.format(cal.getTime()));
+                cal.add(Calendar.DAY_OF_YEAR,30+beginTime);
+            }else{
+
+                beginTime= Integer.parseInt(dateFormat.format(cal.getTime()))- Integer.parseInt(bill);
+                // now add 30 day in Calendar instance
+                cal.add(Calendar.DAY_OF_YEAR, 30-beginTime);
+            }
+
+            event.put(CalendarContract.Events.DTSTART,cal.getTimeInMillis()+24*60*60*1000);
+            event.put(CalendarContract.Events.DTEND, cal.getTimeInMillis());
+            event.put(CalendarContract.Events.ALL_DAY, 1);   // 0 for false, 1 for true
+            event.put(CalendarContract.Events.HAS_ALARM, 1); // 0 for false, 1 for true
+            event.put(CalendarContract.Events.RRULE,"FREQ=MONTHLY;");
+            event.put(CalendarContract.Events.ORIGINAL_ID, id);
+
+
+            String timeZone = TimeZone.getDefault().getID();
+            event.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone);
+
+            Uri baseUri;
+            ContentResolver cr = getContext().getContentResolver();
+            baseUri = Uri.parse("content://com.android.calendar/events");
+            Uri uri= cr.insert(baseUri, event);
+
+            long eventID = Long.parseLong(uri.getLastPathSegment());
+
+            ContentValues reminders = new ContentValues();
+            reminders.put(CalendarContract.Reminders.EVENT_ID, eventID);
+            reminders.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+            reminders.put(CalendarContract.Reminders.MINUTES, 240);
+            cr.insert(CalendarContract.Reminders.CONTENT_URI, reminders);
+
+
+            String res=new NotificationManager(this.getContext()).addNotification(id,"true");
+            Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
+
+        }else {
+
+            paused=true;
+            icon = R.drawable.ic_notifications;
+            Uri deleteUri = null;
+            deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id);
+
+            int rows = requireContext().getContentResolver().delete(deleteUri, null, null);
+            Log.d("debug", String.valueOf(deleteUri));
+            String res=new NotificationManager(this.getContext()).deleteNotification(id);
+            Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
+
+        }
+
+
+        addToGoogleCalender.setImageDrawable(
+                ContextCompat.getDrawable(getContext(), icon));
+    }
 }

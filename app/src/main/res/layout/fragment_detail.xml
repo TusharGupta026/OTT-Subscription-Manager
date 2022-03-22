@@ -46,7 +46,7 @@
                 android:layout_marginHorizontal="35dp"
                 android:backgroundTint="@color/black"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/jio_saavn_logo" />
+                app:srcCompat="@drawable/netflix_logo" />
 
 
         </androidx.cardview.widget.CardView>
@@ -80,6 +80,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Amount"
                 android:textSize="18dp"
                 android:layout_marginBottom="10dp"

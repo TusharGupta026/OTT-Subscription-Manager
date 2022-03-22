@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "618426409129",
+    "project_id": "sub-crib",
+    "storage_bucket": "sub-crib.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618426409129:android:8a7d20536b6c48d10309b8",
+        "android_client_info": {
+          "package_name": "com.example.subcrib"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618426409129-c0b855knvmjj2ca893m4rtlgq2nept4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCanWEBUrldn7f4PwIZbfPA6d45mlZzwkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618426409129-c0b855knvmjj2ca893m4rtlgq2nept4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
