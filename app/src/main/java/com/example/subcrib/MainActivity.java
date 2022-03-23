@@ -2,6 +2,7 @@ package com.example.subcrib;
 
 import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,8 +66,30 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        switch (id) {
+            case R.id.share:
+                share();
+                return true;
+            case R.id.privacyPolicy:
+                privacyPolicy();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-        return super.onOptionsItemSelected(item);
+    private void share() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Basic Content";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Download SubCrib App");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    private void privacyPolicy() {
+        Uri uri = Uri.parse( "https://sub-crib.web.app/" );
+        startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
     }
 
     @Override
