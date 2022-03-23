@@ -1,9 +1,5 @@
-package com.example.subcrib;
+package com.subcrib.app;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.example.subcrib.model.InputFilterMinMax;
-import com.example.subcrib.util.DbManager;
-
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
+import com.subcrib.app.model.InputFilterMinMax;
+import com.subcrib.app.util.DbManager;
 
 
 public class SubsciptionAddACtivity extends AppCompatActivity {

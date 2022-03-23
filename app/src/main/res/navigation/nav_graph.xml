@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.subcrib.FirstFragment"
+        android:name="com.subcrib.app.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
     </fragment>
     <fragment
         android:id="@+id/DetailFragment"
-        android:name="com.example.subcrib.DetailFragment"
+        android:name="com.subcrib.app.DetailFragment"
         tools:layout="@layout/fragment_detail">
         <action
             android:id="@+id/action_DetailFragment_to_FirstFragment"

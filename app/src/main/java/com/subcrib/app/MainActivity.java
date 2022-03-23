@@ -1,4 +1,4 @@
-package com.example.subcrib;
+package com.subcrib.app;
 
 import android.Manifest;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.example.subcrib.databinding.ActivityMainBinding;
+import com.subcrib.app.databinding.ActivityMainBinding;
 import java.util.List;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;

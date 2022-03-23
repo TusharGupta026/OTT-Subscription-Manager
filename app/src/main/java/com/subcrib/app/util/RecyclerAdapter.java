@@ -1,4 +1,4 @@
-package com.example.subcrib.util;
+package com.subcrib.app.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,15 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.subcrib.DetailFragment;
-import com.example.subcrib.R;
-import com.example.subcrib.model.SubscriptionList;
-
+import com.subcrib.app.DetailFragment;
+import com.subcrib.app.R;
+import com.subcrib.app.model.SubscriptionList;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

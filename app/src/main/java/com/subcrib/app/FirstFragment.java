@@ -1,4 +1,4 @@
-package com.example.subcrib;
+package com.subcrib.app;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,11 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.subcrib.app.databinding.FragmentFirstBinding;
+import com.subcrib.app.model.SubscriptionList;
+import com.subcrib.app.util.DbManager;
+import com.subcrib.app.util.RecyclerAdapter;
 
-import com.example.subcrib.databinding.FragmentFirstBinding;
-import com.example.subcrib.model.SubscriptionList;
-import com.example.subcrib.util.DbManager;
-import com.example.subcrib.util.RecyclerAdapter;
 import java.util.ArrayList;
 
 public class FirstFragment extends Fragment {
@@ -23,7 +23,7 @@ public class FirstFragment extends Fragment {
     private FragmentFirstBinding binding;
     RecyclerView subscriptionRecyclerView;
     RecyclerAdapter recyclerAdapter;
-    private ArrayList<SubscriptionList> subscriptionArrayList = new ArrayList<>();
+    private final ArrayList<SubscriptionList> subscriptionArrayList = new ArrayList<>();
 
     public FirstFragment() {
         // Required empty public constructor
@@ -31,7 +31,7 @@ public class FirstFragment extends Fragment {
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 

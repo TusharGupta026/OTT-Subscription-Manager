@@ -1,4 +1,4 @@
-package com.example.subcrib.util;
+package com.subcrib.app.util;
 
 import android.content.ContentValues;
 import android.content.Context;

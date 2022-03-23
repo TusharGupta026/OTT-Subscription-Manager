@@ -1,16 +1,12 @@
-package com.example.subcrib.model;
+package com.subcrib.app.model;
 
 import android.text.InputFilter;
 import android.text.Spanned;
 
 public class InputFilterMinMax implements InputFilter {
 
-    private int min, max;
-
-    public InputFilterMinMax(int min, int max) {
-        this.min = min;
-        this.max = max;
-    }
+    private final int min;
+    private final int max;
 
     public InputFilterMinMax(String min, String max) {
         this.min = Integer.parseInt(min);

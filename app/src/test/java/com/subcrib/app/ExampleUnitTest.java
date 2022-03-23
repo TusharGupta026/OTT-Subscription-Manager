@@ -1,4 +1,4 @@
-package com.example.subcrib;
+package com.subcrib.app;
 
 import org.junit.Test;
 

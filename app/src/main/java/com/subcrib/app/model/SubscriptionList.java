@@ -1,4 +1,4 @@
-package com.example.subcrib.model;
+package com.subcrib.app.model;
 
 public class SubscriptionList {
     private String amount;

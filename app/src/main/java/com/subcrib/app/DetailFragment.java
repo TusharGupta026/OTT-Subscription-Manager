@@ -1,4 +1,4 @@
-package com.example.subcrib;
+package com.subcrib.app;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -15,15 +15,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import com.example.subcrib.databinding.FragmentDetailBinding;
-import com.example.subcrib.util.DbManager;
-import com.example.subcrib.util.NotificationManager;
+
+import com.subcrib.app.databinding.FragmentDetailBinding;
+import com.subcrib.app.util.DbManager;
+import com.subcrib.app.util.NotificationManager;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -35,8 +38,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class DetailFragment extends Fragment implements EasyPermissions.PermissionCallbacks{
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private FragmentDetailBinding binding;
 
     TextView amountText,subscriptionText,descriptionText,paymentText,emailText,dateText,periodText;
@@ -75,19 +76,9 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
     }
 
 
-    public static DetailFragment newInstance(String param1, String param2) {
-        DetailFragment fragment = new DetailFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -254,7 +245,7 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
             Uri deleteUri;
             deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
 
-            int rows = requireContext().getContentResolver().delete(deleteUri, null, null);
+            requireContext().getContentResolver().delete(deleteUri, null, null);
             String res=new NotificationManager(this.getContext()).deleteNotification(id);
             Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
 
