@@ -3,135 +3,171 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="#1B1B1B"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginHorizontal="15dp"
     android:layout_marginTop="15dp"
+    android:layout_marginHorizontal="14dp"
     app:cardCornerRadius="10dp"
     android:elevation="10dp"
     android:id="@+id/subscriptionCard"
-    android:layout_height="73dp">
+    android:layout_height="65dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/subscriptionImage"
-            android:layout_width="65dp"
-            android:layout_marginHorizontal="2.5dp"
-            android:layout_height="62dp"
-            android:layout_marginBottom="3dp"
+            android:layout_width="63dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/youtube_logo" />
+
         <TextView
             android:id="@+id/subscriptionList"
-            android:layout_width="182dp"
-            android:layout_height="40dp"
-            android:text="Youtube Premium"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="5dp"
             android:fontFamily="@font/epilogue_bold"
-            android:layout_marginStart="5dp"
+            android:text="Youtube Premium"
             android:textColor="@color/white"
-            android:textSize="19dp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/rupee"
-            android:layout_width="wrap_content"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/subscriptionImage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="end"
-            android:layout_marginBottom="6dp"
-            android:textSize="23dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/encode_sans_medium"
-            android:text="Rs" />
-        <TextView
-            android:id="@+id/amountList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_gravity="end"
-            android:layout_marginStart="3dp"
-            android:layout_marginBottom="6dp"
-            android:textSize="22dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/encode_sans_medium"
-            android:text="199" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="1dp"
-            android:layout_gravity="end"
-            android:layout_marginBottom="6dp"
-            android:textSize="22dp"
-            android:fontFamily="@font/encode_sans_medium"
-            android:textColor="@color/white"
-            android:text="/" />
-        <!--Monthly List-->
-        <TextView
-            android:id="@+id/periodList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="5dp"
-            android:maxLength="1"
-            android:textAllCaps="true"
-            android:layout_marginBottom="12dp"
-            android:layout_marginStart="1dp"
-            android:textSize="20dp"
-            android:fontFamily="@font/encode_sans_medium"
-            android:textColor="@color/white"
-            android:text="Monthly" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <!--Description List-->
-        <TextView
-            android:id="@+id/descriptionList"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/subscriptionList"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:orientation="horizontal">
+                <!--Currency-->
+                <TextView
+                    android:id="@+id/rupee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/encode_sans_medium"
+                    android:text="Rs"
+                    android:textColor="@color/white"
+                    android:textSize="21sp" />
+                <!--Amount-->
+                <TextView
+                    android:id="@+id/amountList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="3dp"
+                    android:fontFamily="@font/encode_sans_medium"
+                    android:text="199"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+                <!--Slash-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="1dp"
+                    android:fontFamily="@font/encode_sans_medium"
+                    android:text="/"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+                <!--Monthly List-->
+                <TextView
+                    android:id="@+id/periodList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/encode_sans_medium"
+                    android:maxLength="1"
+                    android:text="Monthly"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dateList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/encode_sans_medium"
+                    android:text="Due: 26 Feb"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="75dp"
-            android:layout_marginBottom="4dp"
-            android:textSize="14dp"
-            android:fontFamily="@font/encode_sans_medium"
-            android:textColor="@color/white"
-            android:text="Premium Plan" />
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/subscriptionList"
+            app:layout_constraintStart_toStartOf="@id/subscriptionList"
+            app:layout_constraintTop_toBottomOf="@id/subscriptionList">
+            <!--Description List-->
+            <TextView
+                android:id="@+id/descriptionList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/encode_sans_medium"
+                android:text="Premium Plan"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/emailList"
-            android:layout_width="82dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="257dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/white"
-            android:visibility="gone" />
-        <TextView
-            android:id="@+id/dateList"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="4dp"
-            android:textSize="13dp"
-            android:fontFamily="@font/encode_sans_medium"
-            android:textColor="@color/white"
-            android:text="Due: 26 Feb"/>
-        <TextView
-            android:id="@+id/paymentList"
-            android:layout_width="82dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="257dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/white"
-            android:visibility="gone" />
-    </LinearLayout>
+        </LinearLayout>
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/paymentList"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="257dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/emailList"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="257dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:visibility="gone" />
 
 </androidx.cardview.widget.CardView>

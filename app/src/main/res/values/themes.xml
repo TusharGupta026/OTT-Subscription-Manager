@@ -22,4 +22,10 @@
     <style name="Theme.SubCrib.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.SubCrib.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
 </resources>

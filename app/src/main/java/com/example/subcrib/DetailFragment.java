@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +52,7 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
     private String billingPeriod;
     private int id;
     private int imageResource;
+    long eventID;
     int icon;
     int beginTime;
     private String bill;
@@ -151,7 +151,6 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
             addToGoogleCalender.setImageDrawable(
                     ContextCompat.getDrawable(getContext(), icon));
         }
-        Log.d("date",billingDate);
 
         addToGoogleCalender.setOnClickListener(view -> {
 
@@ -236,7 +235,7 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
             baseUri = Uri.parse("content://com.android.calendar/events");
             Uri uri= cr.insert(baseUri, event);
 
-            long eventID = Long.parseLong(uri.getLastPathSegment());
+            eventID = Long.parseLong(uri.getLastPathSegment());
 
             ContentValues reminders = new ContentValues();
             reminders.put(CalendarContract.Reminders.EVENT_ID, eventID);
@@ -252,16 +251,14 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
 
             paused=true;
             icon = R.drawable.ic_notifications;
-            Uri deleteUri = null;
-            deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, id);
+            Uri deleteUri;
+            deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
 
             int rows = requireContext().getContentResolver().delete(deleteUri, null, null);
-            Log.d("debug", String.valueOf(deleteUri));
             String res=new NotificationManager(this.getContext()).deleteNotification(id);
             Toast.makeText(getContext(),res,Toast.LENGTH_SHORT).show();
 
         }
-
 
         addToGoogleCalender.setImageDrawable(
                 ContextCompat.getDrawable(getContext(), icon));

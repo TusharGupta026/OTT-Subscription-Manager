@@ -4,23 +4,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.res.ResourcesCompat;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-
-
-import android.graphics.Typeface;
 import android.os.Bundle;
-
 import android.text.InputFilter;
+import android.view.ContextThemeWrapper;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-
 import android.widget.Toast;
-
 import com.example.subcrib.model.InputFilterMinMax;
 import com.example.subcrib.util.DbManager;
 
@@ -94,4 +87,23 @@ public class SubsciptionAddACtivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
+        builder.setMessage("Discard Changes ?")
+                .setCancelable(false)
+                .setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SubsciptionAddACtivity.this.finish();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
 }
