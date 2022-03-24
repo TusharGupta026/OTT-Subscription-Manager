@@ -1,75 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/detail_fragment"
     android:background="@color/black"
-    tools:context=".DetailFragment">
+    tools:context=".UpdateSubscriptionActivity">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView3"
-            android:layout_width="380dp"
-            android:layout_height="230dp"
-            android:layout_marginTop="20dp"
+            android:id="@+id/editCardView"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            app:cardBackgroundColor="@color/black"
-            app:cardCornerRadius="10dp">
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/goBackToHome"
+                android:id="@+id/goBackEdit"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 app:srcCompat="@drawable/ic_arrow_back"
-                app:tint="@color/white" />
+                app:tint="@color/black" />
 
-            <ImageView
-                android:id="@+id/editSubscription"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="end"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="55dp"
-                app:srcCompat="@drawable/ic_edit"
-                app:tint="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="150dp"
+                android:fontFamily="@font/encode_sans_medium"
+                android:text="INR"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:typeface="sans" />
 
-            <ImageView
-                android:id="@+id/addToGoogleCalender"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="end"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_notifications"
-                app:tint="@color/white" />
-
-            <ImageView
-                android:id="@+id/imageLogo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/black"
-                app:srcCompat="@drawable/netflix_logo" />
-
+            <EditText
+                android:id="@+id/editSubscriptionAmount"
+                android:layout_width="135dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:ems="1"
+                android:gravity="center"
+                android:hint="0.00"
+                android:inputType="numberDecimal"
+                android:maxLength="3"
+                android:textColor="@color/black"
+                android:textColorHighlight="#154588"
+                android:textColorHint="@color/black"
+                android:textColorLink="#154588"
+                android:textSize="45sp" />
 
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="380dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="265dp"
             android:layout_marginHorizontal="24dp"
-            android:orientation="vertical">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editCardView">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -82,7 +87,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/subscriptionText"
+                android:id="@+id/editSubscription"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/round_input"
@@ -91,30 +96,7 @@
                 android:padding="5dp"
                 android:text="Netflix"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/epilogue_bold"
-                android:text="Amount"
-                android:textColor="@color/grey"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/amountText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/round_input"
-                android:dropDownWidth="match_parent"
-                android:fontFamily="@font/encode_sans_medium"
-                android:padding="5dp"
-                android:text="Rs 199"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -127,17 +109,18 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/descriptionText"
+            <EditText
+                android:id="@+id/editDescription"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:background="@drawable/round_input"
-                android:dropDownWidth="match_parent"
+                android:ems="1"
                 android:fontFamily="@font/encode_sans_medium"
-                android:padding="5dp"
-                android:text="Premium Plan"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:hint="e.g.Premium plan"
+                android:inputType="textPersonName"
+                android:paddingStart="8dp"
+                android:textColorHint="@color/hint_color"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -150,17 +133,17 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/paymentText"
+            <EditText
+                android:id="@+id/editPaymentMethod"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:background="@drawable/round_input"
-                android:dropDownWidth="match_parent"
+                android:ems="1"
                 android:fontFamily="@font/encode_sans_medium"
-                android:padding="5dp"
-                android:text="Credit Card"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:hint="e.g.Credit Card"
+                android:inputType="textPersonName"
+                android:paddingStart="8dp"
+                android:textColorHint="@color/hint_color" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -173,16 +156,17 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/emailText"
+            <EditText
+                android:id="@+id/editEmail"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:background="@drawable/round_input"
+                android:ems="1"
                 android:fontFamily="@font/encode_sans_medium"
-                android:padding="5dp"
-                android:text="guptatushar802@gmail.com"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:hint="Email Address"
+                android:inputType="textPersonName"
+                android:paddingStart="8dp"
+                android:textColorHint="@color/hint_color" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -190,7 +174,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/epilogue_bold"
-                android:text="Next Bill Date"
+                android:text="Billing Period"
                 android:textColor="@color/grey"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -200,22 +184,23 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/dateText"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/editBillingDate"
+                    android:layout_width="145dp"
                     android:layout_height="40dp"
-                    android:layout_weight="1.9"
+                    android:layout_weight="1"
                     android:background="@drawable/round_input"
                     android:ems="1"
                     android:fontFamily="@font/encode_sans_medium"
-                    android:gravity="center_horizontal"
-                    android:paddingVertical="5dp"
-                    android:text="26 March"
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:hint="1"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:paddingStart="8dp"
+                    android:textColorHint="@color/hint_color"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
-                    android:id="@+id/periodText"
+                    android:id="@+id/editBillingPeriodSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="15dp"
@@ -230,7 +215,7 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/removeSubscription"
+                android:id="@+id/updateSubscription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -238,11 +223,10 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/round_button"
                 android:paddingHorizontal="40dp"
-                android:paddingVertical="12dp"
-                android:text="Delete Subscription"
+                android:paddingVertical="15dp"
+                android:text="Update Subscription"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </LinearLayout>
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

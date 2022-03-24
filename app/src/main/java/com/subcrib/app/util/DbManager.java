@@ -49,6 +49,26 @@ public class DbManager extends SQLiteOpenHelper {
         }
     }
 
+    public String updateRecord(String id, String amount, String subscription, String description, String payment, String email, String billingDate, String billingPeriod){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+
+        cv.put("amount",amount);
+        cv.put("subscription",subscription);
+        cv.put("description",description);
+        cv.put("payment",payment);
+        cv.put("email",email);
+        cv.put("billingDate",billingDate);
+        cv.put("billingPeriod",billingPeriod);
+
+        float res=db.update("subscriptions",cv,"id = ?", new String[]{id});
+        if(res==-1){
+            return "Failed";
+        }else{
+            return "Updated Successfully";
+        }
+    }
+
 
     public Cursor readalldata(){
         SQLiteDatabase db=this.getWritableDatabase();

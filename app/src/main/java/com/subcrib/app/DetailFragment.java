@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
     private FragmentDetailBinding binding;
 
     TextView amountText,subscriptionText,descriptionText,paymentText,emailText,dateText,periodText;
-    ImageView goBackToHome, addToGoogleCalender,imageLogo;
+    ImageView goBackToHome, addToGoogleCalender,imageLogo,editSubscription;
 
     AppCompatButton removeSubscription;
     private String amount;
@@ -99,7 +100,7 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
         removeSubscription=(AppCompatButton) binding.getRoot().findViewById(R.id.removeSubscription);
         addToGoogleCalender=(ImageView) binding.getRoot().findViewById(R.id.addToGoogleCalender);
         imageLogo=(ImageView) binding.getRoot().findViewById(R.id.imageLogo);
-
+        editSubscription=(ImageView) binding.getRoot().findViewById(R.id.editSubscription);
 
         amountText.setText("Rs "+amount);
         subscriptionText.setText(subscription);
@@ -151,6 +152,20 @@ public class DetailFragment extends Fragment implements EasyPermissions.Permissi
             addCalendar();
         }
 
+        });
+
+        editSubscription.setOnClickListener(view -> {
+            Intent intent=new Intent(getActivity(),UpdateSubscriptionActivity.class);
+            intent.putExtra("id",id);
+            intent.putExtra("subscriptionText",subscription);
+            intent.putExtra("amountText",amount);
+            intent.putExtra("descriptionText",description);
+            intent.putExtra("paymentText",payment);
+            intent.putExtra("emailText",email);
+            intent.putExtra("dateText",bill);
+            intent.putExtra("periodText",billingPeriod);
+
+            startActivity(intent);
         });
 
         container.setFocusableInTouchMode(true);
